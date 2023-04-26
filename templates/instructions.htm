@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<!-- External CSS Lab -->
+
+<html>
+<head>
+    <title>Retro</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles/template.css') }}"/>
+</head>
+
+<body>
+    <div class="topnav">
+      <a href="{{ url_for('account') }}" style="float: left;">My Account</a>
+      <a class="active" href="{{ url_for('sell') }}" style="float: left;">Sell</a>
+      <a href="{{ url_for('store') }}" style="float: left;">Store</a>
+      <a href="{{ url_for('cart') }}" style="float: right;">Cart</a>
+      {% if 'USERNAME' in session %}
+        <li><a href="{{ url_for('logout') }}" style="float: right;">Sign Out</a></li>
+      {% else %}
+        <li><a href="{{ url_for('login') }}" style="float: right;">Sign In</a></li>
+      {% endif %}
+    </div>
+    <p style = "top: 6%; left: 2%; font-size: 350%;" class = "total">Instructions:</p>
+    <ol style = "font-size: 150%; top: 25%; left: 6%" class = "total">
+        <li>Go to you nearest Khols</li>
+        <li>Go to customer service</li>
+        <li>Ask to sell a game to Retro Store</li>
+        <li>A game grader will come out and give you an estimated cost</li>
+        <li>If you agree to the costs, sign into the kiosk and claim your credits</li>
+    </ol>
+</body>
+</html>

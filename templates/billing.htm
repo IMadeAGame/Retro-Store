@@ -1,0 +1,99 @@
+<!DOCTYPE HTML>
+<!-- External CSS Lab -->
+
+<html>
+<head>
+    <title>Retro</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles/template.css') }}"/>
+</head>
+
+<body>
+    <div class="topnav">
+      <a href="{{ url_for('account') }}" style="float: left;">My Account</a>
+      <a href="{{ url_for('sell') }}" style="float: left;">Sell</a>
+      <a href="{{ url_for('store') }}" style="float: left;">Store</a>
+      <a class="active" href="{{ url_for('cart') }}" style="float: right;">Cart</a>
+      {% if 'USERNAME' in session %}
+        <li><a href="{{ url_for('logout') }}" style="float: right;">Sign Out</a></li>
+      {% else %}
+        <li><a href="{{ url_for('login') }}" style="float: right;">Sign In</a></li>
+      {% endif %}
+    </div>
+
+    <div class="error">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class=flashes>
+            {% for message in messages %}
+              <p>{{ message }}</p>
+            {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
+    </div>
+    <p style = "top: 9%; left: 5%" class = "total">Subtotal: {{"${:,.2f}".format(total)}} </p>
+    <p style = "top: 18%; left: 5%" class = "total">Tax: {{"${:,.2f}".format(total * 0.06)}} </p>
+    <p style = "top: 27%; left: 5%" class = "total">Shipping: {{"${:,.2f}".format(shipping)}} </p>
+    <p style = "top: 36%; left: 5%" class = "total">Total: {{"${:,.2f}".format(total * 1.06 + shipping)}} </p>
+    <p style = "top: 9%; right: 5%" class = "total">Estimated Delivery: {{delivery}} </p>
+    <div class="billing_info" style = "top: 50%"></div>
+    <form method = 'post'>
+        <p style = "font-size: 175%; top: 49%; left: 7%" class = "total">Billing Information:</p>
+        <input type="text" id="fname" class = "total" style = "font-size: 100%; color: black; top: 60%; left: 8%; width: 9%" name="fname" placeholder="First Name" onchange="saveValue(this.value);"/>
+        <input type="text" id="lname" class = "total" style = "font-size: 100%; color: black; top: 60%; left: 18%; width: 10%" name="lname" placeholder="Last Name" onchange="saveValue(this.value);"/>
+        <input type="text" id="phone" class = "total" style = "font-size: 100%; color: black; top: 65%; left: 8%; width: 20%" name="phone" placeholder="Phone Number" onchange="saveValue(this.value);"/>
+        <input type="text" id="address" class = "total" style = "font-size: 100%; color: black; top: 70%; left: 8%; width: 20%" name="address" placeholder="Street Address" onchange="saveValue(this.value);"/>
+        <input type="text" id="zip" class = "total" style = "font-size: 100%; color: black; top: 75%; left: 8%; width: 8%" name="zip" placeholder="Zip Code" onchange="saveValue(this.value);"/>
+        <select name="states" id="states" class = "total" style = "font-size: 100%; color: black; top: 75%; left: 17%; width: 7%">
+             <option value="" disabled selected>-State-</option>
+            {%for state in states%}
+                <option value="{{state}}">{{state}}</option>
+            {%endfor%}
+        </select>
+        <p style = "font-size: 175%; top: 49%; right: 21%" class = "total">Payment Method:</p>
+        <input type="text" id="creditcard" class = "total" style = "font-size: 100%; color: black; top: 60%; right: 20%; width: 15%" name="creditcard" placeholder="Debit/Credit Card Number" onchange="saveValue(this.value);"/>
+        <input type="text" id="security" class = "total" style = "font-size: 100%; color: black; top: 60%; right: 12%; width: 7%" name="security" placeholder="Security Code" onchange="saveValue(this.value);"/>
+        <select name="month" id="month" class = "total" style = "font-size: 100%; color: black; top: 65%; right: 28%; width: 7%">
+             <option value="" disabled selected>-Month-</option>
+            {%for month in months%}
+                <option value="{{month}}">{{month}}</option>
+            {%endfor%}
+        </select>
+        <select name="year" id="year" class = "total" style = "font-size: 100%; color: black; top: 65%; right: 20%; width: 7%">
+             <option value="" disabled selected>-Year-</option>
+            {%for year in years%}
+                <option value="{{year}}">{{year}}</option>
+            {%endfor%}
+        </select>
+        <p style = "font-size: 125%; top: 70%; right: 20%" class = "total">Want to use credits? You have {{"${:,.2f}".format(credits)}}.</p>
+        <input type="number" id="quantity" name="quantity" min="0" max="{{credits}}" step="0.01" value="0" class = "total" style = "font-size: 100%; color: black; top: 73%; right: 12%; width: 7%" onchange="this.value = Math.round(this.value * 100) / 100; if(this.value > {{credits}}) this.value = {{credits}}; if({{total * 1.06 + shipping}} < {{credits}}) this.value = {{total * 1.06 + shipping}}; saveValue(this.value);"/>
+        <input id = "buy" type="submit" name="buy" class = "buy_button" style = "top: 105%" value="Buy Now"/>
+        <script type="text/javascript">
+                // CODE FROM: https://stackoverflow.com/questions/38930144/keep-input-value-after-refresh-page
+                document.getElementById("fname").value = getSavedValue("fname");    // set the value to this input
+                document.getElementById("lname").value = getSavedValue("lname");   // set the value to this input
+                document.getElementById("phone").value = getSavedValue("phone");   // set the value to this input
+                document.getElementById("address").value = getSavedValue("address");   // set the value to this input
+                document.getElementById("zip").value = getSavedValue("zip");   // set the value to this input
+                document.getElementById("creditcard").value = getSavedValue("creditcard");   // set the value to this input
+                document.getElementById("security").value = getSavedValue("security");   // set the value to this input
+                /* Here you can add more inputs to set value. if it's saved */
+
+                //Save the value function - save it to localStorage as (ID, VALUE)
+                function saveValue(e){
+                    var id = e.id;  // get the sender's id to save it .
+                    var val = e.value; // get the value.
+                    localStorage.setItem(id, val);// Every time user writing something, the localStorage's value will override .
+                }
+
+                //get the saved value function - return the value of "v" from localStorage.
+                function getSavedValue  (v){
+                    if (!localStorage.getItem(v)) {
+                        return "";// You can change this to your defualt value.
+                    }
+                    return localStorage.getItem(v);
+                }
+        </script>
+    </form>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<!-- External CSS Lab -->
+
+<html>
+<head>
+    <title>Retro</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles/template.css') }}"/>
+</head>
+
+<body>
+    <div class="topnav">
+      <a href="{{ url_for('account') }}" style="float: left;">My Account</a>
+      <a href="{{ url_for('sell') }}" style="float: left;">Sell</a>
+      <a href="{{ url_for('store') }}" style="float: left;">Store</a>
+      <a class="active" href="{{ url_for('cart') }}" style="float: right;">Cart</a>
+      {% if 'USERNAME' in session %}
+        <li><a href="{{ url_for('logout') }}" style="float: right;">Sign Out</a></li>
+      {% else %}
+        <li><a href="{{ url_for('login') }}" style="float: right;">Sign In</a></li>
+      {% endif %}
+    </div>
+
+    <div class="error">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class=flashes>
+            {% for message in messages %}
+              <p>{{ message }}</p>
+            {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
+    </div>
+    {% if length != 0 %}
+        <form method = 'post'>
+        {%for i in range(0, length)%}
+            <div class = "cart" style = "top: {{space[i]}}%">
+                <p style = "top = 5%; left = 30%; font-size = 150%">{{titles[i]}}</p>
+                <p style = "top = 50%; left = 30%; font-size = 100%">{{publishers[i]}}</p>
+                <p style = "top = 30%; left = 50%; font-size = 150%">{{"${:,.2f}".format(prices[i])}}</p>
+                <p style = "top = 30%; left = 70%; font-size = 150%">Condition: {{conds[i]}}</p>
+            </div>
+            <input type="submit" name="delete{{i}}" class = "delete" style = "top: {{space[i]}}%" value="X"/>
+        {%endfor%}
+        </form>
+        <p style = "top: {{space[length-1] + 18}}%; left: 5%" class = "total">Subtotal: {{total}} </p>
+        <p style = "top: {{space[length-1] + 18}}%; right: 5%" class = "total">Estimated Delivery: {{delivery}} </p>
+        <form action="{{ url_for('checkout') }}">
+            <input id = "buy" type="submit" name="buy" class = "buy_button" style = "top: {{space[length-1] + 36}}%" value="Buy Now"/>
+        </form>
+    {% endif %}
+</body>
+</html>

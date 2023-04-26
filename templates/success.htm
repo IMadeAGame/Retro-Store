@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<!-- External CSS Lab -->
+
+<html>
+<head>
+    <title>Retro</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles/template.css') }}"/>
+</head>
+
+<body>
+    <div class="topnav">
+      <a href="{{ url_for('account') }}" style="float: left;">My Account</a>
+      <a href="{{ url_for('sell') }}" style="float: left;">Sell</a>
+      <a href="{{ url_for('store') }}" style="float: left;">Store</a>
+      <a class="active" href="{{ url_for('cart') }}" style="float: right;">Cart</a>
+      {% if 'USERNAME' in session %}
+        <li><a href="{{ url_for('logout') }}" style="float: right;">Sign Out</a></li>
+      {% else %}
+        <li><a href="{{ url_for('login') }}" style="float: right;">Sign In</a></li>
+      {% endif %}
+    </div>
+
+    <p style = "top: 6%; left: 27%; font-size: 350%;" class = "total">Thank you for your purchase!</p>
+    <p style = "top: 23%; left: 30%; font-size: 150%;" class = "total">You can check your purchase history for shipping updates</p>
+    <form action="{{ url_for('store') }}">
+        <input id = "buy" type="submit" name="buy" class = "buy_button" style = "top: 60%" value="Continue Shopping"/>
+    </form><form action="{{{ url_for('sell') }}">
+        <input id = "buy" type="submit" name="buy" class = "buy_button" style = "top: 80%; background-color: #425963; width: 20%; left: 40%" value="Sell"/>
+    </form>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<!-- External CSS Lab -->
+
+<html>
+<head>
+    <title>Retro</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles/template.css') }}"/>
+</head>
+
+<body>
+    <div class="topnav">
+      <a href="{{ url_for('account') }}" style="float: left;">My Account</a>
+      <a href="{{ url_for('sell') }}" style="float: left;">Sell</a>
+      <a href="{{ url_for('store') }}" style="float: left;">Store</a>
+      <a href="{{ url_for('cart') }}" style="float: right;">Cart</a>
+      <a class="active" href="{{ url_for('login') }}" style="float: right;">Sign In</a>
+    </div>
+    <div class="error">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class=flashes>
+            {% for message in messages %}
+              <p>{{ message }}</p>
+            {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
+    </div>
+    <div class="bold">
+      SIGN IN
+    </div>
+    <form method = 'post'>
+        <div class="signin">
+          <label for="email" style = "font-size: 200%;">Email:</label>
+          <input type="text" id="email" name="email"><br>
+          <label for="pass" style = "font-size: 200%;">Password:</label>
+          <input type="password" id="pass" name="pass"><br><br>
+          Don't have an account? <a href="{{ url_for('register') }}">Sign Up</a><br><br>
+          <input type="submit" value="Login">
+        </div>
+    </form>
+</body>
+</html>

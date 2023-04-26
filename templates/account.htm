@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<!-- External CSS Lab -->
+
+<html>
+<head>
+    <title>template</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles/template.css') }}"/>
+</head>
+
+<body>
+    <div class="topnav">
+      <a class="active" href="{{ url_for('account') }}" style="float: left;">My Account</a>
+      <a href="{{ url_for('sell') }}" style="float: left;">Sell</a>
+      <a href="{{ url_for('store') }}" style="float: left;">Store</a>
+      <a href="{{ url_for('cart') }}" style="float: right;">Cart</a>
+      {% if 'USERNAME' in session %}
+        <li><a href="{{ url_for('logout') }}" style="float: right;">Sign Out</a></li>
+      {% else %}
+        <li><a href="{{ url_for('login') }}" style="float: right;">Sign In</a></li>
+      {% endif %}
+    </div>
+    <div class="bold">
+      Hello, {{session['USERNAME']}}!
+    </div>
+    <div class="bold" style = "font-size: 200%; padding-top: 0;">
+      Credits: {{credits}}
+    </div>
+    <div class="bold" style = "font-size: 200%; text-align: left; padding-left: 5%;">
+      History:
+    </div>
+</body>
+</html>

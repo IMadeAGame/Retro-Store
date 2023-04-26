@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<!-- External CSS Lab -->
+
+<html>
+<head>
+    <title>Retro</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles/template.css') }}"/>
+</head>
+
+<body>
+    <div class="topnav">
+      <a href="{{ url_for('account') }}" style="float: left;">My Account</a>
+      <a class="active" href="{{ url_for('sell') }}" style="float: left;">Sell</a>
+      <a href="{{ url_for('store') }}" style="float: left;">Store</a>
+      <a href="{{ url_for('cart') }}" style="float: right;">Cart</a>
+      {% if 'USERNAME' in session %}
+        <li><a href="{{ url_for('logout') }}" style="float: right;">Sign Out</a></li>
+      {% else %}
+        <li><a href="{{ url_for('login') }}" style="float: right;">Sign In</a></li>
+      {% endif %}
+    </div>
+    <div class="error">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class=flashes>
+            {% for message in messages %}
+              <p style="color: #ddd;">{{ message }}</p>
+            {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
+    </div>
+    <div class="product_page">
+        <a href = "{{ url_for('store') }}" style = "left: 2%; top: 8%; position:fixed;">&lt; Back </a>
+      <img src="{{url_for('static', filename= 'placeholder.png')}}" />
+      <h1 style = "left: 2%; bottom: 18%; position:fixed;">Description:</h1>
+      <p style = "left: 2%; bottom: 13%; position:fixed;">{{product[3]}}</p>
+      <div>
+        <h1 style = "text-align: center">{{product[1]}}</h1>
+        <p style = "text-align: center">{{product[2]}}</p>
+        <h2 style = "left: 4%" id = "priceT">Price {{prices[0]}}</h2>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <h3>Condition:</h3>
+        <select name="conditions" id="conditions" onchange="changeVals({{conditions}},{{prices}})">
+            {%for i in range(0, 7)%}
+                <option value="{{conds[i][2]}}">{{conds[i][2]}}</option>
+            {%endfor%}
+        </select>
+        <form action="{{ url_for('instructions') }}">
+            <input id = "cart" type="submit" name="cart" value="How to Sell"/>
+        </form>
+        <script>
+            function changeVals(conditions,prices) {
+              var newcond = document.getElementById("conditions").value;
+              var cond = conditions.indexOf(newcond);
+              document.getElementById("priceT").innerHTML = "Price: " + String(prices[cond]);
+            }
+        </script>
+      </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<!-- External CSS Lab -->
+
+<html>
+<head>
+    <title>Retro</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles/template.css') }}"/>
+</head>
+
+<body>
+    <div class="topnav">
+      <a href="{{ url_for('account') }}" style="float: left;">My Account</a>
+      <a class="active" href="{{ url_for('sell') }}" style="float: left;">Sell</a>
+      <a href="{{ url_for('store') }}" style="float: left;">Store</a>
+      <a href="{{ url_for('cart') }}" style="float: right;">Cart</a>
+      {% if 'USERNAME' in session %}
+        <li><a href="{{ url_for('logout') }}" style="float: right;">Sign Out</a></li>
+      {% else %}
+        <li><a href="{{ url_for('login') }}" style="float: right;">Sign In</a></li>
+      {% endif %}
+    </div>
+    <div class = "search_bar">SEARCH BAR</div>
+    {%for i in range(0, length)%}
+        <div class="product" style = "left: {{xspace[i]}}%; top: {{yspace[i]}}%">
+            <img src="{{url_for('static', filename='Super Mario World.png')}}" />
+            <h1>{{"${:,.2f}".format(cond[7*i][4]/2)}}-{{"${:,.2f}".format(cond[7*i+6][4]/2)}}</h1>
+            <form method = 'post'>
+                <input type="submit" name="product" value="{{products[i][1]}}"/>
+            </form>
+        </div>
+    {%endfor%}
+</body>
+</html>

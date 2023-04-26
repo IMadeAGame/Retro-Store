@@ -1,0 +1,282 @@
+/* Reference: https://www.w3schools.com/howto/howto_js_topnav.asp */
+
+BODY{
+    background-color: #3E4257;
+}
+
+.topnav {
+    background-color: #48586E;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    overflow: hidden;
+    z-index: 999;
+}
+
+.topnav a {
+  color: #FFFFFF;
+  font-family: "Segoe UI";
+  text-align: center;
+  text-decoration: none;
+  padding: 14px 16px;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.topnav a.active {
+  background-color: #04AA6D;
+}
+
+.bold {
+    text-align: center;
+    padding-top: 5%;
+    font-size: 500%;
+    font-family: "Segoe UI";
+    color: white;
+}
+
+.signin {
+    text-align: center;
+    font-family: "Segoe UI";
+    font-size: 75%;
+    color: white;
+}
+
+.signin a {
+  color: #7CB1F5;
+  font-family: "Segoe UI";
+  text-decoration: none;
+}
+
+.error {
+    background-color: #425963;
+    position:fixed;
+    top:7%;
+    left:0;
+    width:100%;
+    overflow: hidden;
+    font-family: "Segoe UI";
+    text-align: center;
+    color: red;
+    z-index: 999;
+}
+
+.store {
+    position:absolute;
+    top:10%;
+    left:40%;
+    width:60%;
+}
+
+.product {
+    background-color: #48586E;
+    text-decoration: none;
+    height:35%;
+    width:18%;
+    font-size: 100%;
+    font-family: "Segoe UI";
+    color: white;
+    overflow: hidden;
+    position:absolute;
+}
+
+.product h1 {
+    font-weight: bold;
+    font-size: 150%;
+    font-family: "Segoe UI";
+    color: black;
+
+}
+
+.product img {
+    left: 25%;
+    width: 50%;
+    height: 50%;
+    position:relative;
+}
+
+.product input {
+    text-decoration: underline;
+    background-color: Transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 100%;
+    font-family: "Segoe UI";
+    color: white;
+}
+
+.product_page {
+    font-size: 100%;
+    font-family: "Segoe UI";
+    color: white;
+}
+
+.product_page h3 {
+    font-size: 150%;
+    font-family: "Segoe UI";
+    color: white;
+}
+
+.product_page a {
+    text-decoration: none;
+    font-size: 125%;
+    font-family: "Segoe UI";
+    color: #ff8080;
+    z-index: 999;
+}
+
+.product_page h2 {
+    font-weight: bold;
+    display: inline;
+    font-size: 200%;
+    font-family: "Segoe UI";
+    color: white;
+}
+
+.product_page h1 {
+    font-weight: bold;
+    font-size: 250%;
+    font-family: "Segoe UI";
+    color: white;
+}
+
+.product_page img {
+    left: 1%;
+    top: -2%;
+    width: 48%;
+    height: 78%;
+    position:fixed;
+    z-index: 99;
+}
+
+.product_page div {
+    background-color: #48586E;
+    text-decoration: none;
+    height:85%;
+    width:46%;
+    right: 2%;
+    top: 9%;
+    position:fixed;
+    overflow: hidden;
+}
+
+.product_page label {
+    font-weight: bold;
+    font-size: 200%;
+    font-family: "Segoe UI";
+    color: white;
+}
+
+.product_page option {
+    font-size: 100%;
+    font-family: "Segoe UI";
+    color: black;
+}
+
+.product_page select {
+    font-size: 150%;
+    width: 50%;
+    font-family: "Segoe UI";
+    color: black;
+}
+
+.product_page p {
+    font-size: 150%;
+    font-family: "Segoe UI";
+    color: white;
+}
+
+.product_page div input {
+    background-color: #4C486E;
+    border: none;
+    cursor: pointer;
+    font-size: 150%;
+    width: 30%;
+    right: 10%;
+    bottom: 10%;
+    height: 10%;
+    position:fixed;
+    font-family: "Segoe UI";
+    color: white;
+}
+
+.cart {
+    font-size: 100%;
+    font-family: "Segoe UI";
+    color: white;
+    background-color: #48586E;
+    text-decoration: none;
+    height:15%;
+    width:80%;
+    right: 10%;
+    position: absolute;
+    overflow: hidden;
+}
+
+.cart p {
+    position:relative;
+}
+
+.delete {
+    text-decoration: none;
+    background-color: Transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 150%;
+    right: 10%;
+    font-family: "Segoe UI";
+    color: #ff8080;
+    position: absolute;
+}
+
+.buy_button {
+    background-color: #4C486E;
+    border: none;
+    cursor: pointer;
+    font-size: 150%;
+    width: 30%;
+    right: 35%;
+    height: 10%;
+    position:absolute;
+    font-family: "Segoe UI";
+    color: white;
+}
+
+.total {
+    font-weight: bold;
+    font-size: 200%;
+    font-family: "Segoe UI";
+    color: white;
+    position:absolute;
+}
+
+.billing_info {
+    font-size: 100%;
+    font-family: "Segoe UI";
+    color: white;
+    background-color: #48586E;
+    text-decoration: none;
+    height:50%;
+    width:90%;
+    right: 5%;
+    position: absolute;
+    overflow: hidden;
+}
+
+.search_bar {
+font-size: 100%;
+font-family: "Segoe UI";
+color: white;
+background-color: #48586E;
+height:91%;
+width:25%;
+top: 9%;
+left: 1%;
+position: absolute;
+overflow: hidden;
+}
